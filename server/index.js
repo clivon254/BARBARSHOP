@@ -4,6 +4,8 @@ import cors from "cors"
 import mongoose from "mongoose"
 import "dotenv/config"
 import authRouter from "./router/authRouter.js"
+import userRouter from "./router/userRouter.js"
+import barbarRouter from "./router/barbarRouter.js"
 
 
 
@@ -36,6 +38,13 @@ app.get('/',(req,res) => {
 
 // ROUTER
 app.use('/api/auth', authRouter)
+
+
+app.use('/api/user', userRouter)
+
+
+app.use('/api/barbar', barbarRouter)
+
 
 
 
