@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
 
     phone:{type:String , required:true },
 
-    isAdmin:{type:String , required:true },
+    isAdmin:{type:Boolean , default:false},
 
     profilePicture:{type:String , default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
 

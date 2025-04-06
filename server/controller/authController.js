@@ -25,7 +25,7 @@ export const Register = async (req,res,next) => {
 
     const existingEmail = await User.findOne({email})
 
-    if(!existingEmail)
+    if(existingEmail)
     {
         return next(errorHandler(400,"Email is already registered"))
     }
@@ -109,7 +109,7 @@ export const Login = async (req,res,next) => {
 
 export const forgotPassword = async (req,res,next) => {
 
-    const {email} = req.password
+    const {email} = req.body
 
     if(!email || email === "")
     {
@@ -148,7 +148,7 @@ export const forgotPassword = async (req,res,next) => {
             from:"BARBAR CUTZ",
             to:user.email,
             subject:"RESET PASSWORD",
-            text:`Click on this link to reset your password :${url}/reset-password/${token}`
+            text:`Click on this link to reset your password :http://localhost:5173/reset-password/${token}`
         }
 
         transporter.sendMail(mailOptions ,(error,info) => {
@@ -184,7 +184,7 @@ export const resetPassword = async (req,res,next) => {
     {
         const decodedToken = jwt.verify(token,process.env.JWT_SECRETE)
 
-        const user = await User.findOne({id:decodedToken.id})
+        const user = await User.findById(decodedToken.id)
 
         if(!user)
         {

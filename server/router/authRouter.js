@@ -17,7 +17,7 @@ authRouter.post('/login', Login)
 authRouter.post('/forgot-password', forgotPassword)
 
 
-authRouter.post('/reset-password', resetPassword)
+authRouter.post('/reset-password/:token', resetPassword)
 
 
 
