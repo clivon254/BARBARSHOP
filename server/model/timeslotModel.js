@@ -10,9 +10,13 @@ const timeslotSchema = new mongoose.Schema(
 
         endTime:{type:String ,required:true},
 
+        appointmentDate:{type:Date},
+
         isBooked:{type:Boolean , default:false},
 
-        isActive:{type:Boolean , default:true}
+        isActive:{type:Boolean , default:true},
+
+        isRecurring:{type:Boolean ,default:false}
     },
     {
         timestamps:true
