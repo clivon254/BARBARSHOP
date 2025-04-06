@@ -9,6 +9,7 @@ import barbarRouter from "./router/barbarRouter.js"
 import serviceRouter from "./router/serviceRouter.js"
 import timeslotRouter from "./router/timeslotRouter.js"
 import shopScheduleRouter from "./router/shopScheduleRouter.js"
+import appointmentRouter from "./router/appointmentRouter.js"
 
 
 
@@ -56,6 +57,9 @@ app.use('/api/timeslot', timeslotRouter)
 
 
 app.use('/api/shopSchedule', shopScheduleRouter)
+
+
+app.use('/api/appointment', appointmentRouter)
 
 
 
