@@ -183,3 +183,50 @@ export const deleteAppointments = async (req,res,next) => {
     }
 
 }
+
+
+export const rescheduleAppointment = async (req,res,next) => {
+
+    try
+    {
+        const {appointmentId} = req.params 
+
+        const {newTimeslotId} = req.body 
+
+        const appointment = await Appointment.findById(appointmentId).populate("timeslot")
+
+        if(!appointment)
+        {
+            return next(errorHandler(400,"appointment not found"))
+        }
+
+        const newTimeslot = await TimeSlot.findById(newTimeslotId)
+
+        if(!newTimeslot)
+        {
+            return next(errorHandler(404,"New timeslot not found"))
+        }
+
+        if(newTimeslot.isBooked || !newTimeslot.isActive)
+        {
+            return next(errorHandler(400,"The New timeslot is unavailable"))
+        }
+
+        if(appointment.timeslot)
+        {
+            appointment.timeslot.isBooked = false
+
+            await appointment.timeslot.save()
+        }
+
+        appointment.timeslot = newTimeslotId
+
+        await appointment.save()
+
+    }
+    catch(error)
+    {
+        next(error)
+    }
+
+}

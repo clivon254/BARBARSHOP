@@ -10,6 +10,7 @@ import serviceRouter from "./router/serviceRouter.js"
 import timeslotRouter from "./router/timeslotRouter.js"
 import shopScheduleRouter from "./router/shopScheduleRouter.js"
 import appointmentRouter from "./router/appointmentRouter.js"
+import paymentRouter from "./router/paymentRouter.js"
 
 
 
@@ -62,6 +63,11 @@ app.use('/api/shopSchedule', shopScheduleRouter)
 app.use('/api/appointment', appointmentRouter)
 
 
+app.use('/api/payment', paymentRouter)
+
+
+
+
 
 
 // LISTENING
@@ -77,6 +83,7 @@ app.listen(PORT,(err) => {
     }
 
 })
+
 
 
 
