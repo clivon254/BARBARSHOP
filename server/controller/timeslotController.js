@@ -69,7 +69,7 @@ export const getTimeSlotsForDate = async (req,res,next) => {
 
         const schedule = await ShopSchedule.findOne({})
 
-        if(!schedule || !schedule.isOpened)
+        if(!schedule )
         {
             return next(errorHandler(400,"Shop is closed"))
         }
@@ -81,36 +81,30 @@ export const getTimeSlotsForDate = async (req,res,next) => {
             return next(errorHandler(400,"Shop is closed on this day"))
         }
 
+        // Check if timeslots already exist for the given date
+        const existingSlots = await TimeSlot.find({
+            appointmentDate: moment(appointmentDate).startOf("day").toDate(),
+        });
+  
+        if (existingSlots.length > 0) {
+            // Timeslots already exist, return them
+            return res.status(200).json({ success: true, dateSlots: existingSlots });
+        }
+
         const recurringSlots = await TimeSlot.find({isRecurring:true})
 
         const dateSlots = []
 
-        for(const slot of recurringSlots)
-        {
+        for (const slot of recurringSlots) {
 
-            const existingSlot = await TimeSlot.create({
-                startTime:slot.startTime,
-                endTime:slot.endTime,
-                appointmentDate: moment(appointmentDate).startOf("day").toDate(),
-            })
+            const dateSlot = await TimeSlot.create({
+              startTime: slot.startTime,
+              endTime: slot.endTime,
+              appointmentDate: moment(appointmentDate).startOf("day").toDate(),
+            });
 
-            if(!existingSlot)
-            {
-
-                const dateSlot = await TimeSlot.create({
-                    startTime:slot.startTime,
-                    endTime:slot.endTime,
-                    appointmentDate:moment(appointmentDate).startOf("day").toDate(),
-                })
-
-                dateSlots.push(dateSlot)
-
-            }
-            else
-            {
-                dateSlots.push(existingSlot)
-            }
-
+            dateSlots.push(dateSlot);
+        
         }
 
         res.status(200).json({success:true ,dateSlots})
