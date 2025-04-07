@@ -80,20 +80,20 @@ export const updateUser = async (req,res,next) => {
     try
     {
 
-        if(req.body.password)
-        {
-            req.body.password = bcryptjs.hashSync(req.body.password, 10)
-        }
+        // if(req.body.password)
+        // {
+        //     req.body.password = bcryptjs.hashSync(req.body.password)
+        // }
         
         const updatedUser = await User.findByIdAndUpdate(
             userId,
             {
                 $set:{
-                    username:req.body.username,
-                    email:req.body.email,
-                    phone:req.body.phone,
-                    isAdmin:req.body.isAdmin,
-                    profilePicture:req.body.profilePicture,
+                    // username:req.body.username,
+                    // email:req.body.email,
+                    // phone:req.body.phone,
+                    // isAdmin:req.body.isAdmin,
+                    // profilePicture:req.body.profilePicture
                 }
             },
             {new:true}
@@ -102,6 +102,8 @@ export const updateUser = async (req,res,next) => {
         const {password , ...rest} = updatedUser._doc
 
         res.status(200).json({success:true , rest})
+
+
 
     }
     catch(error)

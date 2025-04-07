@@ -1,7 +1,7 @@
 
 import express from "express"
 import { verifyToken } from "../Utils/verify.js"
-import { addBarbar, getBarbar, getBarbars, updateBarbar } from "../controller/barbarController.js"
+import { addBarbar, deleteBarbar, getBarbar, getBarbars, updateBarbar } from "../controller/barbarController.js"
 
 
 const barbarRouter = express.Router()
@@ -19,7 +19,7 @@ barbarRouter.get('/get-barbars', getBarbars)
 barbarRouter.put('/update-barbar/:barbarId', verifyToken, updateBarbar)
 
 
-barbarRouter.delete('/delete-barbar/:barbarId', verifyToken, updateBarbar)
+barbarRouter.delete('/delete-barbar/:barbarId', verifyToken, deleteBarbar)
 
 
 

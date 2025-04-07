@@ -15,15 +15,23 @@ export const addBarbar = async (req,res,next) => {
 
     const {userId,specialities,bio} = req.body
 
-    const user = await User.findById(userId)
+    // const user = await User.findById(userId)
 
-    if(!user)
+    // if(!user)
+    // {
+    //     return next(errorHandler(404,"User not found"))
+    // }
+
+    const barbar = await Barbar.findOne({userId})
+
+    if(barbar)
     {
-        return next(errorHandler(404,"User not found"))
+        return next(errorHandler(400,"The user is already a barbar"))
     }
 
     try
     {
+        
         const newBarbar = new Barbar({
             userId,bio,specialities
         })
@@ -98,6 +106,8 @@ export const updateBarbar = async (req,res,next) => {
         return next(errorHandler(404,"barbar not found"))
     }
 
+    console.log(req.body)
+
     try
     {
 
@@ -124,7 +134,7 @@ export const updateBarbar = async (req,res,next) => {
 }
 
 
-export const dleteBarbar = async (req,res,next) => {
+export const deleteBarbar = async (req,res,next) => {
 
     if(!req.user.isAdmin && !req.user.id)
     {
