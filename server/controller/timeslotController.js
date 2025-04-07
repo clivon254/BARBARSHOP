@@ -171,7 +171,7 @@ export const updateTimeSlot = async (req,res,next) => {
 
     const {timeslotId} = req.params
 
-    const timeSlot = await findById(timeslotId)
+    const timeSlot = await TimeSlot.findById(timeslotId)
 
     if(!timeSlot)
     {
@@ -213,7 +213,7 @@ export const deleteTimeSlot = async (req,res,next) => {
 
     const {timeslotId} = req.params
 
-    const timeSlot = await findById(timeslotId)
+    const timeSlot = await TimeSlot.findById(timeslotId)
 
     if(!timeSlot)
     {

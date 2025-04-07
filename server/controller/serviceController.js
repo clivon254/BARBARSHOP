@@ -3,6 +3,7 @@ import Service from "../model/serviceModel.js"
 import { errorHandler } from "../Utils/error.js"
 
 
+
 export const addService = async (req,res,next) => {
     
     if(!req.user.isAdmin)
@@ -31,6 +32,7 @@ export const addService = async (req,res,next) => {
 
 }
 
+
 export const getService = async (req,res,next) => {
 
     const {serviceId} = req.params
@@ -54,6 +56,7 @@ export const getService = async (req,res,next) => {
 
 }
 
+
 export const getServices = async (req,res,next) => {
 
     try
@@ -69,6 +72,7 @@ export const getServices = async (req,res,next) => {
     }
 
 }
+
 
 export const updateService = async (req,res,next) => {
 
@@ -111,6 +115,7 @@ export const updateService = async (req,res,next) => {
     }
 
 }
+
 
 export const deleteService = async (req,res,next) => {
 

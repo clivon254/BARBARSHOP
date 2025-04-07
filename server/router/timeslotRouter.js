@@ -23,10 +23,10 @@ timeslotRouter.get('/get-Datetimeslots', getTimeSlotsForDate)
 timeslotRouter.get('/get-Avaliabletimeslots', getAvailableTimeslots)
 
 
-timeslotRouter.put('/update-timeslot/:timeslotId', updateTimeSlot)
+timeslotRouter.put('/update-timeslot/:timeslotId',verifyToken , updateTimeSlot)
 
 
-timeslotRouter.delete('/delete-timeslot/:timeslotId', deleteTimeSlot)
+timeslotRouter.delete('/delete-timeslot/:timeslotId',verifyToken, deleteTimeSlot)
 
 
 

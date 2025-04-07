@@ -17,10 +17,10 @@ serviceRouter.get('/get-service/:serviceId', getService)
 serviceRouter.get('/get-services', getServices)
 
 
-serviceRouter.put('/update-service/:serviceId', updateService)
+serviceRouter.put('/update-service/:serviceId',verifyToken, updateService)
 
 
-serviceRouter.delete('/delete-service/:serviceId', deleteService)
+serviceRouter.delete('/delete-service/:serviceId', verifyToken, deleteService)
 
 
 export default serviceRouter
