@@ -62,7 +62,7 @@ export const mpesaPrompt = async (req,res,next) => {
 
         if(appointment.status !== "confirmed")
         {
-            return next(errorHandler(400,"the appointment c"))
+            return next(errorHandler(400,"the appointment wait for the service first"))
         }
 
         let totalPrice = 0;

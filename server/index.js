@@ -11,6 +11,7 @@ import timeslotRouter from "./router/timeslotRouter.js"
 import shopScheduleRouter from "./router/shopScheduleRouter.js"
 import appointmentRouter from "./router/appointmentRouter.js"
 import paymentRouter from "./router/paymentRouter.js"
+import statsRouter from "./router/statsRouter.js"
 
 
 
@@ -67,6 +68,9 @@ app.use('/api/payment', paymentRouter)
 
 
 app.use('/api/paying' , paymentRouter)
+
+
+app.use('/api/stats', statsRouter)
 
 
 

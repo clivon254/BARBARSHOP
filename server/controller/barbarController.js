@@ -15,12 +15,12 @@ export const addBarbar = async (req,res,next) => {
 
     const {userId,specialities,bio} = req.body
 
-    // const user = await User.findById(userId)
+    const user = await User.findById(userId)
 
-    // if(!user)
-    // {
-    //     return next(errorHandler(404,"User not found"))
-    // }
+    if(!user)
+    {
+        return next(errorHandler(404,"User not found"))
+    }
 
     const barbar = await Barbar.findOne({userId})
 

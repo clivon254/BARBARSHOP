@@ -16,8 +16,10 @@ export const addShopSchedule = async (req,res,next) => {
     {
 
         const newShopSchedule = new ShopSchedule({
-            openingTime,closingTime
+            openingTime,closingTime,daysOpen
         })
+
+        await newShopSchedule.save()
 
         res.status(200).json({success:true , newShopSchedule})
 
@@ -33,7 +35,7 @@ export const getShopSchedule = async (req,res,next) => {
 
     try
     {
-        const shopSchedule = await shopSchedule.findOne({})
+        const shopSchedule = await ShopSchedule.findOne({})
 
        res.status(200).json({success:true , shopSchedule})
 
@@ -45,7 +47,7 @@ export const getShopSchedule = async (req,res,next) => {
 
 }
 
-export const updateShopSchedule = async (erq,res,next) => {
+export const updateShopSchedule = async (req,res,next) => {
 
     const {openingTime,closingTime,daysOpen} = req.body
 
@@ -58,11 +60,24 @@ export const updateShopSchedule = async (erq,res,next) => {
             return next(errorHandler(404,"schedule not found"))
         }
 
-        schedule.openingTime = openingTime;
+        if(openingTime)
+        {
 
-        schedule.closingTime = closingTime;
+            schedule.openingTime = openingTime;
 
-        schedule.daysOpen = daysOpen;
+        }
+
+        if(closingTime)
+        {
+            schedule.closingTime = closingTime;
+        }
+
+        if(daysOpen)
+        {
+            schedule.daysOpen = daysOpen;
+        }
+
+        await schedule.save()
 
         res.status(200).json({success:true , schedule})
         

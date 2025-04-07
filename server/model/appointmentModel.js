@@ -21,7 +21,7 @@ const appointmentSchema = new mongoose.Schema(
 
         paid:{type:String , default:false},
 
-        status:{type:String , default:"pending", enum:["pending","confirmed","completed","cancelled"]}
+        status:{type:String , default:"pending", enum:["pending","confirmed","completed","cancelled","attended"]}
     },
     {timestamps:true}
 )

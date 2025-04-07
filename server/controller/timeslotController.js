@@ -162,6 +162,7 @@ export const getTimeSlots = async (req,res,next) => {
 
 }
 
+
 export const updateTimeSlot = async (req,res,next) => {
 
     if(!req.user.isAdmin)
@@ -203,6 +204,7 @@ export const updateTimeSlot = async (req,res,next) => {
     }
 
 }
+
 
 export const deleteTimeSlot = async (req,res,next) => {
 
