@@ -2,6 +2,7 @@
 import Appointment from "../model/appointmentModel.js"
 import TimeSlot from "../model/timeslotModel.js"
 import { errorHandler } from "../Utils/error.js"
+import { generateRandomOrderNumber } from "../Utils/verify.js"
 
 
 
@@ -20,8 +21,10 @@ export const bookAppointments = async (req,res,next) => {
             return next(errorHandler(400,"Timeslot is not availabe"))
         }
 
+        const appointNumber = generateRandomOrderNumber()
+
         const appointment = await Appointment.create({
-            customer,barbar,services,timeslot,notes
+            customer,barbar,services,timeslot,notes,appointNumber
         })
 
         res.status(200).json({success:true , appointment})
@@ -33,6 +36,7 @@ export const bookAppointments = async (req,res,next) => {
     }
 
 }
+
 
 export const getAppointment = async (req,res,next) => {
 
@@ -58,6 +62,7 @@ export const getAppointment = async (req,res,next) => {
 
 }
 
+
 export const getAppointments = async (req,res,next) => {
 
     try
@@ -73,6 +78,7 @@ export const getAppointments = async (req,res,next) => {
     }
 
 }
+
 
 export const updateAppointments = async (req,res,next) => {
 
@@ -117,6 +123,7 @@ export const updateAppointments = async (req,res,next) => {
 
 }
 
+
 export const acceptAppointments = async (req,res,next) => {
 
     const {appointmentId} = req.params;
@@ -153,6 +160,7 @@ export const acceptAppointments = async (req,res,next) => {
     }
 
 }
+
 
 export const deleteAppointments = async (req,res,next) => {
    

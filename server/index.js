@@ -66,6 +66,7 @@ app.use('/api/appointment', appointmentRouter)
 app.use('/api/payment', paymentRouter)
 
 
+app.use('/api/paying' , paymentRouter)
 
 
 
