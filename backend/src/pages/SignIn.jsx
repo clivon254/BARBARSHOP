@@ -110,7 +110,7 @@ export default function SignIn() {
           </div>
 
           {/* form */}
-          <form onSubmit={handleSubmit} className="">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-x-2">
 
             {/* email */}
             <div className="flex flex-col gap-y-2">
@@ -156,7 +156,7 @@ export default function SignIn() {
 
             </div>
             
-
+            
           </form>
 
         </div>
