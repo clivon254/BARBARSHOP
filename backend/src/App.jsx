@@ -10,6 +10,8 @@ import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import Dashboard from './pages/Dashboard'
 import Header from './components/Header'
+import DashSidebar from './components/DashSidebar'
+import Profile from './pages/Profile'
 
 
 
@@ -21,13 +23,25 @@ const LayOut = () => {
 
     currentUser?.isAdmin ?
 
-    <div className="">
+    <div className="w-full h-screen flex-col">
 
       <Header />
 
-      <div className="">
+      <div className="w-full flex lg:divide-x-2 divide-black min-h-[90vh]">
 
-        <Outlet/>
+        {/* sidebar */}
+        <div className="p-5 hidden lg:flex lg:w-[20%] overflow-y-auto">
+
+          <DashSidebar />
+
+        </div>
+
+        {/* mainside */}
+        <div className="w-full lg:w-[80%] overflow-y-auto overflow-hidden">
+
+          <Outlet/>
+
+        </div>
 
       </div>
 
@@ -57,6 +71,8 @@ export default function App() {
           <Route element={<LayOut/>}>
 
             <Route path="/" element={<Dashboard/>} />
+
+            <Route path="/profile" element={<Profile/>} />
 
           </Route>
 

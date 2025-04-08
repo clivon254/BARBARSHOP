@@ -13,6 +13,8 @@ export default function StoreContextProvider(props) {
 
   const [token , setToken] = useState(localStorage.getItem("token"))
 
+  const [isOpen ,setIsOpen] = useState(false)
+
 
   useEffect(() => {
 
@@ -26,7 +28,8 @@ export default function StoreContextProvider(props) {
 
   const contextValue = {
     url,
-    token,setToken
+    token,setToken,
+    isOpen,setIsOpen
   }
 
 

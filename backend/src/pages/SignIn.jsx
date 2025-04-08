@@ -1,15 +1,18 @@
 
 
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../context/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signInFailure, signInStart, signInSuccess } from '../redux/user/useSlice'
 import axios from "axios"
 import Logoo from "../assets/logo.png"
 import { IoMdEyeOff } from 'react-icons/io'
 import { IoEye } from 'react-icons/io5'
+import Loading from '../components/Loading'
+import Alert from '../components/Alert'
+import {toast} from "sonner"
 
 
 
@@ -60,6 +63,8 @@ export default function SignIn() {
 
         navigate('/')
 
+        toast.success("signed in Successfully")
+
       }
 
     }
@@ -82,6 +87,8 @@ export default function SignIn() {
     }
 
   }
+
+
 
   return (
     
@@ -110,12 +117,12 @@ export default function SignIn() {
           </div>
 
           {/* form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-x-2">
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-y-3 max-w-lg mx-auto">
 
             {/* email */}
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-1">
 
-              <label className="">email</label>
+              <label className="label">email</label>
 
               <input 
                 type="text"
@@ -123,7 +130,7 @@ export default function SignIn() {
                 placeholder='name@example.com'
                 onChange={handleChange}
                 value={formData?.email}
-                className="" 
+                className="input" 
               />
 
             </div>
@@ -131,7 +138,7 @@ export default function SignIn() {
             {/* password */}
             <div className="flex flex-col gap-y-1">
 
-              <label  className="">password</label>
+              <label  className="label">password</label>
 
               <div className="w-full relative">
 
@@ -141,7 +148,7 @@ export default function SignIn() {
                   placeholder='*************'
                   onChange={handleChange}
                   value={formData?.password}
-                  className="w-full" 
+                  className="input w-full" 
                 />
 
                 <button 
@@ -156,6 +163,40 @@ export default function SignIn() {
 
             </div>
             
+            {/* rem & forgot */}
+            <div className="flex items-center justify-between text-xs">
+
+              <div className="flex items center gap-x-1">
+
+                <input type="checkbox" className="" />
+
+                <label htmlFor="" className="">remember me </label>
+
+              </div>
+
+              <span className="font-semibold hover:underline">
+
+                <Link to="/forgot-password">
+                  Forgot password
+                </Link>
+
+              </span>
+
+            </div>
+
+            <button 
+              type="submit"
+              className="button"
+              disabled={loading}
+            >
+              {loading ? <Loading/> : "sign in"}
+            </button>
+
+            {error && (
+
+              <Alert color="failure" text={error}/>
+
+            )}
             
           </form>
 
